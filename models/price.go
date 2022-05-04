@@ -3,13 +3,13 @@ package models
 import "github.com/shopspring/decimal"
 
 type PriceAlert struct {
-	UserId int64
-	GameId int64
+	UserId uint
+	GameId uint
 	Price  decimal.Decimal
 }
 
-type GamePrices struct {
-	GameId       int64
-	StoreId      int64
+type GamePrice struct {
+	GameId       uint
+	StoreId      uint
 	CurrentPrice decimal.Decimal
 }
