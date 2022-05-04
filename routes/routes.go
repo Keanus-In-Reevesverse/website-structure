@@ -1,29 +1,17 @@
 package routes
 
 import (
-	"net/http"
-
-	"github.com/Keanus-In-Reevesverse/website-structure/ui/api"
+	"github.com/Keanus-In-Reevesverse/website-structure/controllers"
+	"github.com/gin-gonic/gin"
 )
 
-func LoadRoutes() {
-	//Prices API
-	http.HandleFunc("/", api.GetPrices)
-	http.HandleFunc("/steam", nil)
-	http.HandleFunc("/epic", nil)
-	http.HandleFunc("/psn", nil)
-	http.HandleFunc("/xbox", nil)
-	http.HandleFunc("/nuuvem", nil)
+func HandleRequests() {
+	r := gin.Default()
 
-	//Page ammount
-	http.HandleFunc("/games", nil)
-	http.HandleFunc("/store/steam", nil)
-	http.HandleFunc("/store/epic", nil)
-	http.HandleFunc("/store/psn", nil)
-	http.HandleFunc("/store/xbox", nil)
-	http.HandleFunc("/store/nuuvem", nil)
+	//User
+	r.GET("/users", controllers.GetUsers)
+	r.GET("/user:id", controllers.GetUser)
+	//Game
 
-	//Utilities
-	http.HandleFunc("/users", nil)
-	http.HandleFunc("/users/{id}", nil)
+	//Price
 }

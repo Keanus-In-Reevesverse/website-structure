@@ -1,0 +1,25 @@
+services:
+  buscajogos_db:
+    image: mysql:latest
+    volumes:
+      - ./migration/docker-database-initial.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql  
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: buscajogos
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: secret
+
+  mysql-workbench:
+    image: lscr.io/linuxserver/mysql-workbench:latest
+    container_name: mysql-workbench
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /path/to/config:/config
+    ports:
+      - 3000:3000
+    restart: unless-stopped
