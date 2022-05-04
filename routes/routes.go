@@ -10,8 +10,16 @@ func HandleRequests() {
 
 	//User
 	r.GET("/users", controllers.GetUsers)
-	r.GET("/user:id", controllers.GetUser)
+	r.GET("/user/:user_id", controllers.GetUser)
+	r.GET("/users/login", controllers.GetLogin)
+	r.GET("/user/login/:user_id", controllers.GetLogins)
+
+	r.POST("/users", controllers.CreateUser)
+
 	//Game
 
 	//Price
+
+	//Run
+	r.Run()
 }

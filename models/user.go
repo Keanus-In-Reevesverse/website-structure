@@ -3,10 +3,10 @@ package models
 import "github.com/shopspring/decimal"
 
 type User struct {
-	UserId uint
-	Name   string
-	Email  string
-	Phone  int64
+	UserId      uint
+	Name        string
+	Email       string
+	PhoneNumber int64
 }
 
 type Login struct {
