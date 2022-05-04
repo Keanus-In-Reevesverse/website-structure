@@ -1,8 +1,8 @@
 package models
 
 type Game struct {
-	GameId      uint
-	GenreId     uint
+	GameId      int64
+	GenreId     int64
 	Name        string
 	Publisher   string
 	Description string
@@ -11,11 +11,11 @@ type Game struct {
 }
 
 type Genre struct {
-	GenreId     uint
+	GenreId     int64
 	Description string
 }
 
 type Store struct {
-	StoreId uint
+	StoreId int64
 	Name    string
 }

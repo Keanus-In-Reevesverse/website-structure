@@ -3,6 +3,7 @@ package database
 import (
 	"log"
 
+	"github.com/Keanus-In-Reevesverse/website-structure/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -20,4 +21,25 @@ func DatabaseConnect() {
 		log.Panic(err.Error())
 	}
 
+}
+
+func CreateUser(userCreated *models.UserCreated) *models.User {
+	var user models.User
+
+	user.Name = userCreated.Name
+	user.Email = userCreated.Email
+	user.PhoneNumber = userCreated.PhoneNumber
+
+	DB.Table("USER").Create(&user)
+
+	return &user
+}
+
+func CreateLogin(userCreated *models.UserCreated) {
+	var login models.Login
+
+	login.Email = userCreated.Email
+	login.Password = userCreated.Password
+
+	DB.Table("LOGIN").Create(&login)
 }

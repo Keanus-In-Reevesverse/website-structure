@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/Keanus-In-Reevesverse/website-structure/database"
@@ -10,35 +9,19 @@ import (
 )
 
 //Creates
-func CreateUser(c *gin.Context) {
-	var user models.User
+func NewUser(c *gin.Context) {
+	var userCreated models.UserCreated
 
-	if err := c.ShouldBindJSON(&user); err != nil {
+	if err := c.ShouldBindJSON(&userCreated); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Erro na criação": err.Error()})
 		return
 	}
 
-	database.DB.Table("USER").Create(&user)
+	user := database.CreateUser(&userCreated)
+	//database.CreateLogin(&userCreated)
 
-	CreateLogin(c, &user)
-}
-
-func CreateLogin(c *gin.Context, user *models.User) {
-	var login models.Login
-
-	login.UserId = user.UserId
-	login.Email = user.Email
-	login.Password = user.Name
-
-	if err := c.ShouldBindJSON(&login); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"Erro na criação": err.Error()})
-		fmt.Printf("Erro: %+v", err)
-		return
-	}
-
-	database.DB.Table("LOGIN").Create(&login)
+	c.JSON(http.StatusOK, &user)
 }
 
 //Getters

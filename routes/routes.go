@@ -11,10 +11,10 @@ func HandleRequests() {
 	//User
 	r.GET("/users", controllers.GetUsers)
 	r.GET("/user/:user_id", controllers.GetUser)
-	r.GET("/users/login", controllers.GetLogin)
-	r.GET("/user/login/:user_id", controllers.GetLogins)
+	r.GET("/users/login", controllers.GetLogins)
+	r.GET("/user/login/:user_id", controllers.GetLogin)
 
-	r.POST("/users", controllers.CreateUser)
+	r.POST("/users", controllers.NewUser)
 
 	//Game
 
