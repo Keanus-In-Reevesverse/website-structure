@@ -3,26 +3,27 @@ package models
 import "github.com/shopspring/decimal"
 
 type User struct {
-	UserId uint
-	Name   string
-	Email  string
-	Phone  int64
+	UserId       int64
+	Name         string
+	Email        string
+	Phone_Number string
 }
 
-type Login struct {
-	UserId   uint
-	Email    string
-	Password string
+type UserCreated struct {
+	UserId      int64
+	Name        string
+	Email       string
+	Password    string
+	PhoneNumber string
 }
-
 type History struct {
-	GameId     uint
+	GameId     int64
 	StoreName  string
 	Price      decimal.Decimal
 	ChangeDate string
 }
 
 type Favorite struct {
-	UserId uint
-	GameId uint
+	UserId int64
+	GameId int64
 }
