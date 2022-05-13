@@ -16,13 +16,6 @@ type UserCreated struct {
 	Password    string
 	PhoneNumber string
 }
-
-type Login struct {
-	UserId   int64
-	Email    string
-	Password string
-}
-
 type History struct {
 	GameId     int64
 	StoreName  string

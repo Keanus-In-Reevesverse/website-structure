@@ -10,9 +10,9 @@ func HandleRequests() {
 
 	//User
 	r.GET("/users", controllers.GetUsers)
-	r.GET("/user/:user_id", controllers.GetUser)
+	r.GET("/users/:user_id", controllers.GetUserById)
 	r.GET("/users/login", controllers.GetLogins)
-	r.GET("/user/login/:user_id", controllers.GetLogin)
+	r.GET("/users/login/:user_id", controllers.GetLoginById)
 
 	r.POST("/users", controllers.NewUser)
 

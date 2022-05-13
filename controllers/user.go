@@ -19,7 +19,7 @@ func NewUser(c *gin.Context) {
 	}
 
 	user := database.CreateUser(&userCreated)
-	//database.CreateLogin(&userCreated)
+	database.CreateLogin(&userCreated)
 
 	c.JSON(http.StatusOK, &user)
 }
@@ -31,7 +31,7 @@ func GetUsers(c *gin.Context) {
 	c.JSON(200, &users)
 }
 
-func GetUser(c *gin.Context) {
+func GetUserById(c *gin.Context) {
 	var user models.User
 	id := c.Params.ByName("user_id")
 
@@ -44,25 +44,4 @@ func GetUser(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, user)
-}
-
-func GetLogins(c *gin.Context) {
-	var login []models.Login
-	database.DB.Table("LOGIN").Find(&login)
-	c.JSON(200, &login)
-}
-
-func GetLogin(c *gin.Context) {
-	var login models.Login
-	id := c.Params.ByName("user_id")
-
-	database.DB.Table("LOGIN").First(&login, id)
-
-	if login.UserId == 0 {
-		c.JSON(http.StatusNotFound, gin.H{
-			"Not Found": "User not found"})
-		return
-	}
-
-	c.JSON(http.StatusOK, login)
 }
