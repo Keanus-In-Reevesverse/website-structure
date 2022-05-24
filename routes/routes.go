@@ -8,10 +8,11 @@ import (
 func HandleRequests() {
 	r := gin.Default()
 
-	//User
+	//Register
 	r.GET("/users/:user_id", controllers.GetUserById)
-
 	r.POST("/users", controllers.NewUser)
+
+	//Login
 
 	//Game
 
