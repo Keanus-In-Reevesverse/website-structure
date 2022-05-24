@@ -28,7 +28,7 @@ func CreateUser(userCreated *models.UserCreated) *models.User {
 
 	user.Name = userCreated.Name
 	user.Email = userCreated.Email
-	user.Phone_Number = userCreated.PhoneNumber
+	user.PhoneNumber = userCreated.PhoneNumber
 
 	DB.Table("USER").Create(&user)
 
