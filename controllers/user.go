@@ -10,25 +10,26 @@ import (
 
 //Creates
 func NewUser(c *gin.Context) {
-	var userCreated models.UserCreated
+	var userCreated models.UserInput
 
+	//Bind
 	if err := c.ShouldBindJSON(&userCreated); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Erro na criação": err.Error()})
 		return
 	}
 
+	//Creates
 	user := database.CreateUser(&userCreated)
 	database.CreateLogin(&userCreated)
 
-	c.JSON(http.StatusOK, &user)
-}
+	//Response
+	var userReturn models.UserOutput
+	userReturn.Name = user.Name
+	userReturn.Email = user.Email
+	userReturn.PhoneNumber = user.PhoneNumber
 
-//Getters
-func GetUsers(c *gin.Context) {
-	var users []models.User
-	database.DB.Table("USER").Find(&users)
-	c.JSON(200, &users)
+	c.JSON(http.StatusOK, &userReturn)
 }
 
 func GetUserById(c *gin.Context) {

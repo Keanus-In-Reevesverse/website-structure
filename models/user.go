@@ -3,17 +3,22 @@ package models
 import "github.com/shopspring/decimal"
 
 type User struct {
-	UserId       int64
-	Name         string
-	Email        string
-	Phone_Number string
-}
-
-type UserCreated struct {
 	UserId      int64
 	Name        string
 	Email       string
+	PhoneNumber string
+}
+
+type UserInput struct {
+	Name        string
+	Email       string
 	Password    string
+	PhoneNumber string
+}
+
+type UserOutput struct {
+	Name        string
+	Email       string
 	PhoneNumber string
 }
 type History struct {
