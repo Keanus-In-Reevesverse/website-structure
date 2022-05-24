@@ -9,11 +9,16 @@ type User struct {
 	PhoneNumber string
 }
 
-type UserCreated struct {
-	UserId      int64
+type UserInput struct {
 	Name        string
 	Email       string
 	Password    string
+	PhoneNumber string
+}
+
+type UserOutput struct {
+	Name        string
+	Email       string
 	PhoneNumber string
 }
 type History struct {

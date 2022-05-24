@@ -10,7 +10,7 @@ import (
 
 //Creates
 func NewUser(c *gin.Context) {
-	var userCreated models.UserCreated
+	var userCreated models.UserInput
 
 	if err := c.ShouldBindJSON(&userCreated); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -21,7 +21,12 @@ func NewUser(c *gin.Context) {
 	user := database.CreateUser(&userCreated)
 	database.CreateLogin(&userCreated)
 
-	c.JSON(http.StatusOK, &user)
+	var userReturn models.UserOutput
+	userReturn.Name = user.Name
+	userReturn.Email = user.Email
+	userReturn.PhoneNumber = user.PhoneNumber
+
+	c.JSON(http.StatusOK, &userReturn)
 }
 
 //Getters
