@@ -13,6 +13,7 @@ func HandleRequests() {
 	r.POST("/users", controllers.NewUser)
 
 	//Login
+	r.POST("/login", controllers.Login)
 
 	//Game
 

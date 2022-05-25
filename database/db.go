@@ -23,7 +23,7 @@ func DatabaseConnect() {
 
 }
 
-func CreateUser(userCreated *models.UserInput) *models.User {
+func CreateUser(userCreated *models.UserRequest) *models.User {
 	var user models.User
 
 	user.Name = userCreated.Name

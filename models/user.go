@@ -1,7 +1,5 @@
 package models
 
-import "github.com/shopspring/decimal"
-
 type User struct {
 	UserId      int64
 	Name        string
@@ -10,11 +8,17 @@ type User struct {
 	Password    string
 }
 
-type History struct {
-	GameId     int64
-	StoreName  string
-	Price      decimal.Decimal
-	ChangeDate string
+type UserRequest struct {
+	Name        string
+	Email       string
+	Password    string
+	PhoneNumber string
+}
+
+type UserResponse struct {
+	Name        string
+	Email       string
+	PhoneNumber string
 }
 
 type Favorite struct {

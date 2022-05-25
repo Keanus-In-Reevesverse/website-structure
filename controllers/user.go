@@ -11,7 +11,7 @@ import (
 
 //Creates
 func NewUser(c *gin.Context) {
-	var userCreated models.UserInput
+	var userCreated models.UserRequest
 
 	//Bind
 	if err := c.ShouldBindJSON(&userCreated); err != nil {
@@ -25,7 +25,7 @@ func NewUser(c *gin.Context) {
 	user := database.CreateUser(&userCreated)
 
 	//Response
-	var userReturn models.UserOutput
+	var userReturn models.UserResponse
 	userReturn.Name = user.Name
 	userReturn.Email = user.Email
 	userReturn.PhoneNumber = user.PhoneNumber
