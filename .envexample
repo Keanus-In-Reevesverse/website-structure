@@ -1,5 +1,2 @@
-#App Port
-PORT=":8000"
-
-#API Port
-API_PORT=":5000"
+#Secret
+SECRET_KEY="secret_key"

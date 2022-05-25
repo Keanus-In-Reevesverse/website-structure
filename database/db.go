@@ -23,23 +23,15 @@ func DatabaseConnect() {
 
 }
 
-func CreateUser(userCreated *models.UserInput) *models.User {
+func CreateUser(userCreated *models.UserRequest) *models.User {
 	var user models.User
 
 	user.Name = userCreated.Name
 	user.Email = userCreated.Email
 	user.PhoneNumber = userCreated.PhoneNumber
+	user.Password = userCreated.Password
 
 	DB.Table("USER").Create(&user)
 
 	return &user
-}
-
-func CreateLogin(userCreated *models.UserInput) {
-	var login models.Login
-
-	login.Email = userCreated.Email
-	login.Password = userCreated.Password
-
-	DB.Table("LOGIN").Create(&login)
 }

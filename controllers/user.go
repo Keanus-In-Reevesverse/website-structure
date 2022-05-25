@@ -5,12 +5,13 @@ import (
 
 	"github.com/Keanus-In-Reevesverse/website-structure/database"
 	"github.com/Keanus-In-Reevesverse/website-structure/models"
+	"github.com/Keanus-In-Reevesverse/website-structure/services"
 	"github.com/gin-gonic/gin"
 )
 
 //Creates
 func NewUser(c *gin.Context) {
-	var userCreated models.UserInput
+	var userCreated models.UserRequest
 
 	//Bind
 	if err := c.ShouldBindJSON(&userCreated); err != nil {
@@ -19,12 +20,12 @@ func NewUser(c *gin.Context) {
 		return
 	}
 
-	//Creates
+	//Password encode && create
+	userCreated.Password = services.SHA256Encoder(userCreated.Password)
 	user := database.CreateUser(&userCreated)
-	database.CreateLogin(&userCreated)
 
 	//Response
-	var userReturn models.UserOutput
+	var userReturn models.UserResponse
 	userReturn.Name = user.Name
 	userReturn.Email = user.Email
 	userReturn.PhoneNumber = user.PhoneNumber
