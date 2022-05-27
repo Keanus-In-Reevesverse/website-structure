@@ -1,7 +1,9 @@
 package database
 
 import (
+	"fmt"
 	"log"
+	"os"
 
 	"github.com/Keanus-In-Reevesverse/website-structure/models"
 	"gorm.io/driver/mysql"
@@ -14,7 +16,13 @@ var (
 )
 
 func DatabaseConnect() {
-	conn := "admin:secret@tcp(127.0.0.1:3306)/buscajogos?charset=utf8mb4&parseTime=True&loc=Local"
+	admin := os.Getenv("DB_ADMIN")
+	adminPass := os.Getenv("DB_ADMIN_PASS")
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	name := os.Getenv("DB_NAME")
+
+	conn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", admin, adminPass, host, port, name)
 	DB, err = gorm.Open(mysql.Open(conn))
 
 	if err != nil {

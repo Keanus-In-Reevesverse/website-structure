@@ -1,0 +1,1 @@
+web: busca-jogos-plus-structure
