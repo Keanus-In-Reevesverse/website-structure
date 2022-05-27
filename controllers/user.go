@@ -81,7 +81,7 @@ func EditUser(c *gin.Context) {
 	user := userRequestParse(&userCreate)
 	password := services.SHA256Encoder(user.Password)
 
-	database.DB.Table("USER").First(&user).Where("email = ? AND password = ?", user.Email, password)
+	database.DB.Table("USER").Select(&user).Where("email = ? AND password = ?", user.Email, password)
 	userCreated := database.UserOps(&user, "edit")
 
 	userReturn := userResponseParse(userCreated)
@@ -112,7 +112,7 @@ func DeleteUser(c *gin.Context) {
 	user := userRequestParse(&userCreate)
 	password := services.SHA256Encoder(user.Password)
 
-	database.DB.Table("USER").First(&user).Where("email = ? AND password = ?", user.Email, password)
+	database.DB.Table("USER").Select(&user).Where("email = ? AND password = ?", user.Email, password)
 	userCreated := database.UserOps(&user, "delete")
 
 	userReturn := userResponseParse(userCreated)
