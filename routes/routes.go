@@ -34,7 +34,6 @@ func HandleRequests() {
 	//Price
 	r.GET("/prices", controllers.GetPrices)
 	r.GET("/prices/:game_id", controllers.GetPricesByGameId)
-	r.GET("/prices/:store_id", controllers.GetPricesByStoreId)
 
 	//Alert
 	r.GET("/alerts", controllers.GetPriceAlerts)
