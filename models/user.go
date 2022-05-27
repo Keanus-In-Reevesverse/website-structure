@@ -3,11 +3,11 @@ package models
 import "gopkg.in/validator.v2"
 
 type User struct {
-	UserId      int64
-	Name        string
-	Email       string
-	PhoneNumber string
-	Password    string
+	UserId      int64  `json:"user_id"`
+	Name        string `json:"name"`
+	Email       string `json:"email"`
+	PhoneNumber string `json:"phone_number"`
+	Password    string `json:"password"`
 }
 
 type UserRequest struct {

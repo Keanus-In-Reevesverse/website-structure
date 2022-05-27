@@ -6,9 +6,9 @@ import (
 )
 
 type PriceAlert struct {
-	UserId int64 `json:"user_id" validate:"regexp=^[0-9]*$"`
-	GameId int64 `json:"game_id" validate:"regexp=^[0-9]*$"`
-	Price  decimal.Decimal
+	UserId int64           `json:"user_id" validate:"regexp=^[0-9]*$"`
+	GameId int64           `json:"game_id" validate:"regexp=^[0-9]*$"`
+	Price  decimal.Decimal `json:"price"`
 }
 
 func PriceAlertValidator(priceAlert *PriceAlert) error {
@@ -20,15 +20,7 @@ func PriceAlertValidator(priceAlert *PriceAlert) error {
 }
 
 type GamePrice struct {
-	GameId       int64  `json:"game_id" validate:"regexp=^[0-9]*$"`
-	StoreName    string `json:"store_name" validate:"max=60, nonzero"`
-	CurrentPrice decimal.Decimal
-}
-
-func GamePriceValidator(gamePrice *GamePrice) error {
-	if err := validator.Validate(gamePrice); err != nil {
-		return err
-	}
-
-	return nil
+	GameId       int64           `json:"game_id"`
+	StoreName    string          `json:"store_name"`
+	CurrentPrice decimal.Decimal `json:"current_price"`
 }

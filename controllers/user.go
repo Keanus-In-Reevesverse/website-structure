@@ -43,18 +43,3 @@ func NewUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, &userReturn)
 }
-
-func GetUserById(c *gin.Context) {
-	var user models.User
-	id := c.Params.ByName("user_id")
-
-	database.DB.Table("USER").First(&user, id)
-
-	if user.UserId == 0 {
-		c.JSON(http.StatusNotFound, gin.H{
-			"Not Found": "User not found"})
-		return
-	}
-
-	c.JSON(http.StatusOK, user)
-}
