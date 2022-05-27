@@ -10,6 +10,8 @@ func HandleRequests() {
 
 	//Register
 	r.POST("/users", controllers.NewUser)
+	r.PATCH("/users", controllers.EditUser)
+	r.DELETE("/users", controllers.DeleteUser)
 
 	//Login
 	r.POST("/login", controllers.Login)

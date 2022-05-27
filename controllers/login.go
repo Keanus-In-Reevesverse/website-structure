@@ -19,6 +19,12 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	if err := models.LoginValidator(&login); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
+		return
+	}
+
 	var user models.User
 	database.DB.Table("USER").Where("email = ?", login.Email).First(&user)
 

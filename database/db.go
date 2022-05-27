@@ -31,7 +31,7 @@ func DatabaseConnect() {
 
 }
 
-func CreateUser(userCreated *models.UserRequest) *models.User {
+func UserOps(userCreated *models.UserRequest, operation string) *models.User {
 	var user models.User
 
 	user.Name = userCreated.Name
@@ -39,7 +39,17 @@ func CreateUser(userCreated *models.UserRequest) *models.User {
 	user.PhoneNumber = userCreated.PhoneNumber
 	user.Password = userCreated.Password
 
-	DB.Table("USER").Create(&user)
+	if operation == "create" {
+		DB.Table("USER").Create(&user)
+	}
+
+	if operation == "edit" {
+		DB.Model(&user).UpdateColumns(user)
+	}
+
+	if operation == "delete" {
+		DB.Delete(&user).Where("user_id = ?", user.UserId)
+	}
 
 	return &user
 }
