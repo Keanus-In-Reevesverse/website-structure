@@ -13,7 +13,7 @@ type User struct {
 type UserRequest struct {
 	Name        string `json:"name" validate:"max=60, nonzero"`
 	Email       string `json:"email" validate:"max=60, nonzero"`
-	PhoneNumber string `json:"phone_number" validate:"len=11, nonzero"`
+	PhoneNumber string `json:"phone_number" validate:"len=12, nonzero"`
 	Password    string `json:"password" validate:"max=30, nonzero"`
 }
 

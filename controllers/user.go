@@ -9,6 +9,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func userRequestParse(userCreated *models.UserRequest) models.User {
+	var user models.User
+	user.Name = userCreated.Name
+	user.Email = userCreated.Email
+	user.PhoneNumber = userCreated.PhoneNumber
+	user.Password = userCreated.Password
+
+	return user
+}
+
 func userResponseParse(user *models.User) models.UserResponse {
 	var userReturn models.UserResponse
 	userReturn.Name = user.Name
@@ -20,30 +30,33 @@ func userResponseParse(user *models.User) models.UserResponse {
 
 //Creates
 func NewUser(c *gin.Context) {
-	var userCreated models.UserRequest
+	var userCreate models.UserRequest
 
 	//Bind
-	if err := c.ShouldBindJSON(&userCreated); err != nil {
+	if err := c.ShouldBindJSON(&userCreate); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Erro na criação": err.Error()})
 		return
 	}
 
-	if err := models.UserRequestValidator(&userCreated); err != nil {
+	if err := models.UserRequestValidator(&userCreate); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Erro na request": err.Error()})
 		return
 	}
 
 	//Password encode && create
-	userCreated.Password = services.SHA256Encoder(userCreated.Password)
-	user := database.UserOps(&userCreated, "create")
+	userCreate.Password = services.SHA256Encoder(userCreate.Password)
+
+	user := userRequestParse(&userCreate)
+
+	userCreated := database.UserOps(&user, "create")
 
 	//Response
-	userReturn := userResponseParse(user)
+	userReturn := userResponseParse(userCreated)
 
 	if err := models.UserResponseValidator(&userReturn); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
+		c.JSON(http.StatusConflict, gin.H{
 			"Erro na response": err.Error()})
 	}
 
@@ -51,29 +64,30 @@ func NewUser(c *gin.Context) {
 }
 
 func EditUser(c *gin.Context) {
-	var userCreated models.UserRequest
+	var userCreate models.UserRequest
 
-	if err := c.ShouldBindJSON(&userCreated); err != nil {
+	if err := c.ShouldBindJSON(&userCreate); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Erro no bind": err.Error()})
 		return
 	}
 
-	if err := models.UserRequestValidator(&userCreated); err != nil {
+	if err := models.UserRequestValidator(&userCreate); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Erro na request": err.Error()})
 		return
 	}
 
-	password := services.SHA256Encoder(userCreated.Password)
-	database.DB.First(&userCreated).Where("email = ? AND password = ?", userCreated.Email, password)
+	user := userRequestParse(&userCreate)
+	password := services.SHA256Encoder(user.Password)
 
-	user := database.UserOps(&userCreated, "edit")
+	database.DB.Table("USER").First(&user).Where("email = ? AND password = ?", user.Email, password)
+	userCreated := database.UserOps(&user, "edit")
 
-	userReturn := userResponseParse(user)
+	userReturn := userResponseParse(userCreated)
 
 	if err := models.UserResponseValidator(&userReturn); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
+		c.JSON(http.StatusConflict, gin.H{
 			"Erro na response": err.Error()})
 	}
 
@@ -81,29 +95,30 @@ func EditUser(c *gin.Context) {
 }
 
 func DeleteUser(c *gin.Context) {
-	var userCreated models.UserRequest
+	var userCreate models.UserRequest
 
-	if err := c.ShouldBindJSON(&userCreated); err != nil {
+	if err := c.ShouldBindJSON(&userCreate); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Erro no bind": err.Error()})
 		return
 	}
 
-	if err := models.UserRequestValidator(&userCreated); err != nil {
+	if err := models.UserRequestValidator(&userCreate); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Erro na request": err.Error()})
 		return
 	}
 
-	password := services.SHA256Encoder(userCreated.Password)
-	database.DB.First(&userCreated).Where("email = ? AND password = ?", userCreated.Email, password)
+	user := userRequestParse(&userCreate)
+	password := services.SHA256Encoder(user.Password)
 
-	user := database.UserOps(&userCreated, "delete")
+	database.DB.Table("USER").First(&user).Where("email = ? AND password = ?", user.Email, password)
+	userCreated := database.UserOps(&user, "delete")
 
-	userReturn := userResponseParse(user)
+	userReturn := userResponseParse(userCreated)
 
 	if err := models.UserResponseValidator(&userReturn); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
+		c.JSON(http.StatusConflict, gin.H{
 			"Erro na response": err.Error()})
 	}
 

@@ -31,25 +31,18 @@ func DatabaseConnect() {
 
 }
 
-func UserOps(userCreated *models.UserRequest, operation string) *models.User {
-	var user models.User
-
-	user.Name = userCreated.Name
-	user.Email = userCreated.Email
-	user.PhoneNumber = userCreated.PhoneNumber
-	user.Password = userCreated.Password
-
+func UserOps(user *models.User, operation string) *models.User {
 	if operation == "create" {
 		DB.Table("USER").Create(&user)
 	}
 
 	if operation == "edit" {
-		DB.Model(&user).UpdateColumns(user)
+		DB.Table("USER").UpdateColumns(&user).Where("user_id = ?", &user.UserId)
 	}
 
 	if operation == "delete" {
-		DB.Delete(&user).Where("user_id = ?", user.UserId)
+		DB.Table("USER").Delete(&user).Where("user_id = ?", &user.UserId)
 	}
 
-	return &user
+	return user
 }
