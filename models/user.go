@@ -3,25 +3,17 @@ package models
 import "gopkg.in/validator.v2"
 
 type User struct {
-	UserId      int64  `json:"user_id" validate:"regexp=^[0-9]*$"`
-	Name        string `json:"name" validate:"max=60, nonzero"`
-	Email       string `json:"email" validate:"max=60, nonzero"`
-	PhoneNumber string `json:"phone_number" validate:"len=12, nonzero"`
-	Password    string `json:"password" validate:"max=30, nonzero"`
-}
-
-func UserValidator(user *User) error {
-	if err := validator.Validate(user); err != nil {
-		return err
-	}
-
-	return nil
+	UserId      int64
+	Name        string
+	Email       string
+	PhoneNumber string
+	Password    string
 }
 
 type UserRequest struct {
 	Name        string `json:"name" validate:"max=60, nonzero"`
 	Email       string `json:"email" validate:"max=60, nonzero"`
-	PhoneNumber string `json:"phone_number" validate:"len=12, nonzero"`
+	PhoneNumber string `json:"phone_number" validate:"len=11, nonzero"`
 	Password    string `json:"password" validate:"max=30, nonzero"`
 }
 

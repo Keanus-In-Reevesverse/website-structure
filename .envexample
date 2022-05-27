@@ -1,12 +1,12 @@
 #Secret
-SECRET_KEY=secret_key
+SECRET_KEY="secret_key"
 
 #Database
-DB_ADMIN=admin
-DB_ADMIN_PASS=secret
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_NAME=root
+DB_ADMIN="admin"
+DB_ADMIN_PASS="secret"
+DB_HOST="127.0.0.1"
+DB_PORT="3306"
+DB_NAME="buscajogos"
 
 #Docker
-DB_ROOT_PASS=secret
+DB_ROOT_PASS="secret"

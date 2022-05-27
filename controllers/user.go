@@ -20,6 +20,12 @@ func NewUser(c *gin.Context) {
 		return
 	}
 
+	if err := models.UserRequestValidator(&userCreated); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Erro na request": err.Error()})
+		return
+	}
+
 	//Password encode && create
 	userCreated.Password = services.SHA256Encoder(userCreated.Password)
 	user := database.CreateUser(&userCreated)
@@ -29,6 +35,11 @@ func NewUser(c *gin.Context) {
 	userReturn.Name = user.Name
 	userReturn.Email = user.Email
 	userReturn.PhoneNumber = user.PhoneNumber
+
+	if err := models.UserResponseValidator(&userReturn); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"Erro na response": err.Error()})
+	}
 
 	c.JSON(http.StatusOK, &userReturn)
 }
