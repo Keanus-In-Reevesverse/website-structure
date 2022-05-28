@@ -9,8 +9,9 @@ func HandleRequests() {
 	r := gin.Default()
 
 	//Register
-	r.GET("/users/:user_id", controllers.GetUserById)
 	r.POST("/users", controllers.NewUser)
+	r.PATCH("/users", controllers.EditUser)
+	r.DELETE("/users", controllers.DeleteUser)
 
 	//Login
 	r.POST("/login", controllers.Login)
@@ -34,7 +35,6 @@ func HandleRequests() {
 	//Price
 	r.GET("/prices", controllers.GetPrices)
 	r.GET("/prices/:game_id", controllers.GetPricesByGameId)
-	r.GET("/prices/:store_id", controllers.GetPricesByStoreId)
 
 	//Alert
 	r.GET("/alerts", controllers.GetPriceAlerts)

@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/Keanus-In-Reevesverse/website-structure/database"
@@ -35,30 +34,10 @@ func GetPricesByGameId(c *gin.Context) {
 				"Not Found": "Game not found"})
 			return
 		}
-		if price.StoreId == 0 {
+		if price.StoreName == "" {
 			c.JSON(http.StatusNotFound, gin.H{
 				"Not Found": "Store not found"})
 			return
-		}
-	}
-
-	c.JSON(http.StatusOK, prices)
-}
-
-func GetPricesByStoreId(c *gin.Context) {
-	var prices []models.GamePrice
-	id := c.Params.ByName("store_id")
-
-	database.DB.Table("GAME_PRICES").Find(&prices).Where("store_id = ?", id)
-
-	for i, price := range prices {
-		if fmt.Sprintf("%c", price.StoreId) != id {
-			c.JSON(http.StatusNotFound, gin.H{
-				"Not Found": "Wrong Store"})
-			return
-		}
-		if price.GameId == 0 {
-			prices = append(prices[:i], prices[i+1:]...)
 		}
 	}
 

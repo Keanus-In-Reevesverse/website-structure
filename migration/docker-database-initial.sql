@@ -20,7 +20,7 @@ CREATE TABLE USER (
 user_id INT auto_increment PRIMARY KEY,
 email VARCHAR(60) UNIQUE,
 name VARCHAR(60),
-phone_number VARCHAR(12),
+phone_number VARCHAR(11),
 password VARCHAR(100)
 );
 
