@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/Keanus-In-Reevesverse/website-structure/database"
@@ -90,7 +92,7 @@ func EditUser(c *gin.Context) {
 	password := services.SHA256Encoder(user.Password)
 
 	//Gets user by email and password
-	database.DB.Table("USER").Select(&user).Where("email = ? AND password = ?", user.Email, password)
+	database.DB.Table("USER").Select("user_id").Where("email = ? AND password = ?", &user.Email, password).Scan(&user.UserId)
 
 	//Edit user on DB
 	userCreated := database.UserOps(&user, "edit")
@@ -124,7 +126,9 @@ func DeleteUser(c *gin.Context) {
 
 	password := services.SHA256Encoder(user.Password)
 
-	database.DB.Table("USER").Select(&user).Where("email = ? AND password = ?", user.Email, password)
+	database.DB.Table("USER").Select("user_id").Where("email = ? AND password = ?", &user.Email, password).Scan(&user.UserId)
+	log.Default().Output(1, fmt.Sprintf("%+v", user))
+	//database.DB.Table("USER").Select(&user).Where("email = ? AND password = ?", user.Email, password)
 
 	//Delete user owned by string
 	userCreated := database.UserOps(&user, "delete")

@@ -37,11 +37,11 @@ func UserOps(user *models.User, operation string) *models.User {
 	}
 
 	if operation == "edit" {
-		DB.Table("USER").UpdateColumns(&user).Where("user_id = ?", &user.UserId)
+		DB.Table("USER").Where("user_id = ?", &user.UserId).Updates(&user)
 	}
 
 	if operation == "delete" {
-		DB.Table("USER").Delete(&user).Where("user_id = ?", &user.UserId)
+		DB.Table("USER").Where("user_id = ?", &user.UserId).Unscoped().Delete(&user)
 	}
 
 	return user
