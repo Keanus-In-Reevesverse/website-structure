@@ -89,10 +89,10 @@ func EditUser(c *gin.Context) {
 	user := userRequestParse(&userCreate)
 
 	//Password encode && verify
-	password := services.SHA256Encoder(user.Password)
+	user.Password = services.SHA256Encoder(user.Password)
 
 	//Gets user by email and password
-	database.DB.Table("USER").Select("user_id").Where("email = ? AND password = ?", &user.Email, password).Scan(&user.UserId)
+	database.DB.Table("USER").Select("user_id").Where("email = ? AND password = ?", &user.Email, user.Password).Scan(&user.UserId)
 
 	//Edit user on DB
 	userCreated := database.UserOps(&user, "edit")

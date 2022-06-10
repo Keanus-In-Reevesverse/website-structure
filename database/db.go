@@ -46,3 +46,19 @@ func UserOps(user *models.User, operation string) *models.User {
 
 	return user
 }
+
+func AlertOps(alert models.PriceAlert, operation string) models.PriceAlert {
+	if operation == "create" {
+		DB.Table("USER").Create(&alert)
+	}
+
+	if operation == "edit" {
+		DB.Table("USER").Where("game_id = ?", &alert.UserId).Updates(&alert)
+	}
+
+	if operation == "delete" {
+		DB.Table("USER").Where("user_id = ?", &alert.UserId).Unscoped().Delete(&alert)
+	}
+
+	return alert
+}
