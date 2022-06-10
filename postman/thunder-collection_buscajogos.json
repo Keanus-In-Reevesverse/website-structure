@@ -1,0 +1,367 @@
+{
+    "client":"Thunder Client",
+    "collectionName":"buscajogos",
+    "dateExported":"2022-06-08T10:24:52.034Z",
+    "version":"1.1",
+    "folders":[
+       {
+          "_id":"0feb10ec-ca10-4d05-95ee-6cd358235d06",
+          "name":"Register/Login",
+          "containerId":"",
+          "created":"2022-05-04T21:16:33.678Z",
+          "sortNum":20000
+       },
+       {
+          "_id":"5ba55441-4abb-4018-a60a-ab6e2e97589d",
+          "name":"User Ops",
+          "containerId":"",
+          "created":"2022-06-03T12:36:40.140Z",
+          "sortNum":30000
+       },
+       {
+          "_id":"cc58753d-0817-4920-9a98-2e0d845e3ba6",
+          "name":"Game Getters",
+          "containerId":"",
+          "created":"2022-06-03T12:59:25.102Z",
+          "sortNum":35000
+       },
+       {
+          "_id":"2b334eb4-6349-4f5c-a25e-824af512388e",
+          "name":"Genre Getters",
+          "containerId":"",
+          "created":"2022-06-03T12:38:22.825Z",
+          "sortNum":40000
+       },
+       {
+          "_id":"2204159f-8a34-4213-bc98-5b07bd924dff",
+          "name":"Store Getters",
+          "containerId":"",
+          "created":"2022-06-03T13:00:19.027Z",
+          "sortNum":80000
+       },
+       {
+          "_id":"86353779-7e75-4d34-a054-b53df19ef824",
+          "name":"HIstory Getters",
+          "containerId":"",
+          "created":"2022-06-08T10:20:54.697Z",
+          "sortNum":90000
+       },
+       {
+          "_id":"d76c2c79-6039-47d2-b4fe-727904bc783d",
+          "name":"Price Alert Getters",
+          "containerId":"",
+          "created":"2022-06-08T10:22:50.755Z",
+          "sortNum":100000
+       }
+    ],
+    "requests":[
+       {
+          "_id":"7cc0f0b0-2504-49cc-991b-b20297edab77",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"cc58753d-0817-4920-9a98-2e0d845e3ba6",
+          "name":"List Games",
+          "url":"/games",
+          "method":"GET",
+          "sortNum":10000,
+          "created":"2022-06-03T12:59:29.910Z",
+          "modified":"2022-06-03T12:59:48.996Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"d2097b5f-762e-487f-9424-848d3c1f2e33",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"2204159f-8a34-4213-bc98-5b07bd924dff",
+          "name":"List Stores",
+          "url":"/stores",
+          "method":"GET",
+          "sortNum":10000,
+          "created":"2022-06-03T13:00:19.027Z",
+          "modified":"2022-06-08T10:21:36.217Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"033bd4d6-8022-4d5b-8f6c-e01bf4857ae0",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"86353779-7e75-4d34-a054-b53df19ef824",
+          "name":"List History",
+          "url":"/games",
+          "method":"GET",
+          "sortNum":10000,
+          "created":"2022-06-08T10:20:54.698Z",
+          "modified":"2022-06-08T10:20:54.698Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"ec43685f-8287-4147-a9f7-c6d0bee91324",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"d76c2c79-6039-47d2-b4fe-727904bc783d",
+          "name":"List Alerts",
+          "url":"/alerts",
+          "method":"GET",
+          "sortNum":10000,
+          "created":"2022-06-08T10:22:50.755Z",
+          "modified":"2022-06-08T10:23:43.329Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"57a110b2-a7fc-4a09-861f-d14657e402f1",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"cc58753d-0817-4920-9a98-2e0d845e3ba6",
+          "name":"Get Game By Id",
+          "url":"/genres/1",
+          "method":"GET",
+          "sortNum":20000,
+          "created":"2022-06-03T12:59:38.717Z",
+          "modified":"2022-06-03T12:59:41.032Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"5fdb9513-6df9-42a9-9274-d685f1a6ee48",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"2204159f-8a34-4213-bc98-5b07bd924dff",
+          "name":"Get Store By Id",
+          "url":"/stores/1",
+          "method":"GET",
+          "sortNum":20000,
+          "created":"2022-06-03T13:00:19.028Z",
+          "modified":"2022-06-08T10:21:42.495Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"1866f1bc-0875-4162-8b7c-b5f9dba2f924",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"86353779-7e75-4d34-a054-b53df19ef824",
+          "name":"Get History By Id",
+          "url":"/genres/1",
+          "method":"GET",
+          "sortNum":20000,
+          "created":"2022-06-08T10:20:54.699Z",
+          "modified":"2022-06-08T10:20:54.698Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"5b6d0c09-37c4-4a49-975b-14e732a26106",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"d76c2c79-6039-47d2-b4fe-727904bc783d",
+          "name":"Get Alert By Id",
+          "url":"/alerts/1/1",
+          "method":"GET",
+          "sortNum":20000,
+          "created":"2022-06-08T10:22:50.756Z",
+          "modified":"2022-06-08T10:24:10.047Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"f33f8e34-47ed-4eb8-a3a5-59b0da318118",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"0feb10ec-ca10-4d05-95ee-6cd358235d06",
+          "name":"Create User",
+          "url":"localhost:8080/users",
+          "method":"POST",
+          "sortNum":30000,
+          "created":"2022-05-04T21:16:43.963Z",
+          "modified":"2022-06-03T12:36:29.961Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "body":{
+             "type":"json",
+             "raw":"{\n    \"name\":\"Jonah\",\n    \"email\":\"joas@mail\",\n    \"phone_number\":\"012345678912\",\n    \"password\":\"senha\"\n}",
+             "form":[
+                
+             ]
+          },
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"547025cb-34a4-40e3-906b-c8e726ebb2fd",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"0feb10ec-ca10-4d05-95ee-6cd358235d06",
+          "name":"Login",
+          "url":"localhost:8080/login",
+          "method":"POST",
+          "sortNum":60000,
+          "created":"2022-05-25T00:23:52.576Z",
+          "modified":"2022-05-27T12:35:06.681Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "body":{
+             "type":"json",
+             "raw":"{\n    \"email\":\"ricardo@mail\",\n    \"password\":\"ssss\"\n}",
+             "form":[
+                
+             ]
+          },
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"a81510b8-673d-4c29-b5c4-b248a731d7fd",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"5ba55441-4abb-4018-a60a-ab6e2e97589d",
+          "name":"Edit User",
+          "url":"localhost:8080/users",
+          "method":"PATCH",
+          "sortNum":70000,
+          "created":"2022-06-03T12:36:49.654Z",
+          "modified":"2022-06-03T12:37:05.756Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "body":{
+             "type":"json",
+             "raw":"{\n    \"name\":\"Jonah\",\n    \"email\":\"joas@mail\",\n    \"phone_number\":\"012345678912\",\n    \"password\":\"senha\"\n}",
+             "form":[
+                
+             ]
+          },
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"baaac113-bd05-44a7-8d83-a847e9270c21",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"5ba55441-4abb-4018-a60a-ab6e2e97589d",
+          "name":"Delete User",
+          "url":"localhost:8080/users",
+          "method":"DELETE",
+          "sortNum":80000,
+          "created":"2022-06-03T12:37:42.322Z",
+          "modified":"2022-06-03T12:37:53.827Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "body":{
+             "type":"json",
+             "raw":"{\n    \"name\":\"Jonah\",\n    \"email\":\"joas@mail\",\n    \"phone_number\":\"012345678912\",\n    \"password\":\"senha\"\n}",
+             "form":[
+                
+             ]
+          },
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"fa912233-a8f9-484c-a280-4d2c797e9d35",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"2b334eb4-6349-4f5c-a25e-824af512388e",
+          "name":"List Genres",
+          "url":"/genres",
+          "method":"GET",
+          "sortNum":90000,
+          "created":"2022-06-03T12:38:40.794Z",
+          "modified":"2022-06-03T12:39:35.424Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "tests":[
+             
+          ]
+       },
+       {
+          "_id":"89152bfe-76b7-469c-b126-29212f146f62",
+          "colId":"0d14a132-741f-44cc-b084-db2aed693ea1",
+          "containerId":"2b334eb4-6349-4f5c-a25e-824af512388e",
+          "name":"Get Genre By Id",
+          "url":"/genres/1",
+          "method":"GET",
+          "sortNum":100000,
+          "created":"2022-06-03T12:41:39.185Z",
+          "modified":"2022-06-03T12:42:08.812Z",
+          "headers":[
+             
+          ],
+          "params":[
+             
+          ],
+          "tests":[
+             
+          ]
+       }
+    ]
+ }

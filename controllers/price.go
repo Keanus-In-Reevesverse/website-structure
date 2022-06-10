@@ -8,6 +8,27 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//Create
+func CreatePriceAlert(c *gin.Context) {
+	var alert models.PriceAlert
+
+	if err := c.ShouldBindJSON(&alert); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Erro na criação": err.Error()})
+		return
+	}
+
+	if err := models.PriceAlertValidator(&alert); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Erro na request": err.Error()})
+		return
+	}
+
+	alert = database.AlertOps(alert, "create")
+
+	c.JSON(http.StatusOK, &alert)
+}
+
 //Get arrays
 func GetPrices(c *gin.Context) {
 	var prices []models.GamePrice
@@ -67,4 +88,11 @@ func GetAlertsByIds(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, alerts)
+}
+
+//Edit
+func EditAlert(c *gin.Context) {
+}
+
+func DeleteAlert(c *gin.Context) {
 }

@@ -37,12 +37,28 @@ func UserOps(user *models.User, operation string) *models.User {
 	}
 
 	if operation == "edit" {
-		DB.Table("USER").UpdateColumns(&user).Where("user_id = ?", &user.UserId)
+		DB.Table("USER").Where("user_id = ?", &user.UserId).Updates(&user)
 	}
 
 	if operation == "delete" {
-		DB.Table("USER").Delete(&user).Where("user_id = ?", &user.UserId)
+		DB.Table("USER").Where("user_id = ?", &user.UserId).Unscoped().Delete(&user)
 	}
 
 	return user
+}
+
+func AlertOps(alert models.PriceAlert, operation string) models.PriceAlert {
+	if operation == "create" {
+		DB.Table("USER").Create(&alert)
+	}
+
+	if operation == "edit" {
+		DB.Table("USER").Where("game_id = ?", &alert.UserId).Updates(&alert)
+	}
+
+	if operation == "delete" {
+		DB.Table("USER").Where("user_id = ?", &alert.UserId).Unscoped().Delete(&alert)
+	}
+
+	return alert
 }

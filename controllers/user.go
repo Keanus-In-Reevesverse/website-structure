@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/Keanus-In-Reevesverse/website-structure/database"
@@ -30,15 +32,17 @@ func userResponseParse(user *models.User) models.UserResponse {
 
 //Creates
 func NewUser(c *gin.Context) {
+	//Create request
 	var userCreate models.UserRequest
 
-	//Bind
+	//Bind request
 	if err := c.ShouldBindJSON(&userCreate); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Erro na criação": err.Error()})
 		return
 	}
 
+	//Request Validator
 	if err := models.UserRequestValidator(&userCreate); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Erro na request": err.Error()})
@@ -48,18 +52,22 @@ func NewUser(c *gin.Context) {
 	//Password encode && create
 	userCreate.Password = services.SHA256Encoder(userCreate.Password)
 
+	//Parse Request to User model
 	user := userRequestParse(&userCreate)
 
+	//Create User on DB
 	userCreated := database.UserOps(&user, "create")
 
-	//Response
+	//Parse Return
 	userReturn := userResponseParse(userCreated)
 
+	//Response Validator
 	if err := models.UserResponseValidator(&userReturn); err != nil {
 		c.JSON(http.StatusConflict, gin.H{
 			"Erro na response": err.Error()})
 	}
 
+	//Return Error
 	c.JSON(http.StatusOK, &userReturn)
 }
 
@@ -79,9 +87,14 @@ func EditUser(c *gin.Context) {
 	}
 
 	user := userRequestParse(&userCreate)
-	password := services.SHA256Encoder(user.Password)
 
-	database.DB.Table("USER").Select(&user).Where("email = ? AND password = ?", user.Email, password)
+	//Password encode && verify
+	user.Password = services.SHA256Encoder(user.Password)
+
+	//Gets user by email and password
+	database.DB.Table("USER").Select("user_id").Where("email = ? AND password = ?", &user.Email, user.Password).Scan(&user.UserId)
+
+	//Edit user on DB
 	userCreated := database.UserOps(&user, "edit")
 
 	userReturn := userResponseParse(userCreated)
@@ -110,9 +123,14 @@ func DeleteUser(c *gin.Context) {
 	}
 
 	user := userRequestParse(&userCreate)
+
 	password := services.SHA256Encoder(user.Password)
 
-	database.DB.Table("USER").Select(&user).Where("email = ? AND password = ?", user.Email, password)
+	database.DB.Table("USER").Select("user_id").Where("email = ? AND password = ?", &user.Email, password).Scan(&user.UserId)
+	log.Default().Output(1, fmt.Sprintf("%+v", user))
+	//database.DB.Table("USER").Select(&user).Where("email = ? AND password = ?", user.Email, password)
+
+	//Delete user owned by string
 	userCreated := database.UserOps(&user, "delete")
 
 	userReturn := userResponseParse(userCreated)
