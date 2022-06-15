@@ -2,11 +2,19 @@ package routes
 
 import (
 	"github.com/Keanus-In-Reevesverse/website-structure/controllers"
+	"github.com/Keanus-In-Reevesverse/website-structure/docs"
 	"github.com/gin-gonic/gin"
+
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func HandleRequests() {
 	r := gin.Default()
+
+	//Swagger
+	docs.SwaggerInfo.BasePath = "/"
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	//Register
 	r.POST("/users", controllers.NewUser)

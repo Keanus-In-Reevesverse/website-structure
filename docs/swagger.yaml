@@ -1,0 +1,43 @@
+definitions:
+  httputil.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+  models.Favorite:
+    properties:
+      game_id:
+        maximum: 60
+        type: integer
+      user_id:
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /favorites:
+    get:
+      consumes:
+      - application/json
+      description: Route to show all favorites
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Favorite'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Show all favorites
+      tags:
+      - favorites
+swagger: "2.0"
