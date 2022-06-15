@@ -1,8 +1,7 @@
 package controllers
 
 import (
-	"fmt"
-	"log"
+	"errors"
 	"net/http"
 
 	"github.com/Keanus-In-Reevesverse/website-structure/database"
@@ -30,6 +29,15 @@ func userResponseParse(user *models.User) models.UserResponse {
 	return userReturn
 }
 
+func userVerifier(user models.User) (models.User, error) {
+	database.DB.Table("USER").Select("user_id").Where("email = ?", &user.Email).Scan(&user.UserId)
+	if user.UserId != 0 {
+		err := errors.New("email ja cadastrado")
+		return models.User{}, err
+	}
+	return user, nil
+}
+
 //Creates
 func NewUser(c *gin.Context) {
 	//Create request
@@ -54,6 +62,13 @@ func NewUser(c *gin.Context) {
 
 	//Parse Request to User model
 	user := userRequestParse(&userCreate)
+
+	user, err := userVerifier(user)
+	if err != nil {
+		c.JSON(http.StatusConflict, gin.H{
+			"Erro na criação": err.Error()})
+		return
+	}
 
 	//Create User on DB
 	userCreated := database.UserOps(&user, "create")
@@ -86,13 +101,18 @@ func EditUser(c *gin.Context) {
 		return
 	}
 
+	//Password encode && verify
+	userCreate.Password = services.SHA256Encoder(userCreate.Password)
+
 	user := userRequestParse(&userCreate)
 
-	//Password encode && verify
-	user.Password = services.SHA256Encoder(user.Password)
-
-	//Gets user by email and password
-	database.DB.Table("USER").Select("user_id").Where("email = ? AND password = ?", &user.Email, user.Password).Scan(&user.UserId)
+	//Verifica se email já existe
+	user, err := userVerifier(user)
+	if err != nil {
+		c.JSON(http.StatusConflict, gin.H{
+			"Erro na criação": err.Error()})
+		return
+	}
 
 	//Edit user on DB
 	userCreated := database.UserOps(&user, "edit")
@@ -122,13 +142,16 @@ func DeleteUser(c *gin.Context) {
 		return
 	}
 
+	userCreate.Password = services.SHA256Encoder(userCreate.Password)
+
 	user := userRequestParse(&userCreate)
 
-	password := services.SHA256Encoder(user.Password)
-
-	database.DB.Table("USER").Select("user_id").Where("email = ? AND password = ?", &user.Email, password).Scan(&user.UserId)
-	log.Default().Output(1, fmt.Sprintf("%+v", user))
-	//database.DB.Table("USER").Select(&user).Where("email = ? AND password = ?", user.Email, password)
+	user, err := userVerifier(user)
+	if err != nil {
+		c.JSON(http.StatusConflict, gin.H{
+			"Erro na criação": err.Error()})
+		return
+	}
 
 	//Delete user owned by string
 	userCreated := database.UserOps(&user, "delete")
