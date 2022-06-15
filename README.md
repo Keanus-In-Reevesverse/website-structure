@@ -34,6 +34,9 @@
 
 Follow .envexample for database connection and port definitions
 
+To up docker for local running do a:
+`docker-compose up -d`
+
 To run this project just do a:
 `go run main.go`
 
