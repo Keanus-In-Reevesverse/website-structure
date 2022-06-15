@@ -9,7 +9,7 @@ import (
 	_ "github.com/swaggo/swag/example/celler/httputil"
 )
 
-//GetStudents godoc
+//GetFavorites godoc
 // @Summary      Show all favorites
 // @Description  Route to show all favorites
 // @Tags         favorites
@@ -24,6 +24,15 @@ func GetFavorites(c *gin.Context) {
 	c.JSON(http.StatusOK, &favorites)
 }
 
+//GetFavoriteByUserId godoc
+// @Summary      Show favorite by user_id
+// @Description  Route to show favorite game by user_id
+// @Tags         favorites
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  models.Favorite
+// @Failure      400  {object}  httputil.HTTPError
+// @Router       /favorites/id [get]
 func GetFavoritesByUserId(c *gin.Context) {
 	var favorites []models.GamePrice
 	id := c.Params.ByName("user_id")

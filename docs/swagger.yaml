@@ -40,4 +40,23 @@ paths:
       summary: Show all favorites
       tags:
       - favorites
+  /favorites/id:
+    get:
+      consumes:
+      - application/json
+      description: Route to show favorite game by user_id
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Favorite'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Show favorite by user_id
+      tags:
+      - favorites
 swagger: "2.0"
