@@ -49,10 +49,10 @@ func HandleRequests() {
 	r.GET("/prices/:game_id", controllers.GetPricesByGameId)
 
 	//Alert
-	r.POST("/alerts", controllers.CreatePriceAlert)
+	r.POST("/alerts", controllers.CreateAlert)
 	r.PATCH("/alerts", controllers.EditAlert)
 	r.DELETE("/alerts", controllers.DeleteAlert)
-	r.GET("/alerts", controllers.GetPriceAlerts)
+	r.GET("/alerts", controllers.GetAlerts)
 	r.GET("/alerts/:user_id/:game_id", controllers.GetAlertsByIds)
 
 	//Run

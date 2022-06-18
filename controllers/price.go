@@ -9,8 +9,8 @@ import (
 )
 
 //Create
-func CreatePriceAlert(c *gin.Context) {
-	var alert models.PriceAlert
+func CreateAlert(c *gin.Context) {
+	var alert models.Alert
 
 	if err := c.ShouldBindJSON(&alert); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -18,7 +18,7 @@ func CreatePriceAlert(c *gin.Context) {
 		return
 	}
 
-	if err := models.PriceAlertValidator(&alert); err != nil {
+	if err := models.AlertValidator(&alert); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Erro na request": err.Error()})
 		return
@@ -29,22 +29,39 @@ func CreatePriceAlert(c *gin.Context) {
 	c.JSON(http.StatusOK, &alert)
 }
 
-//Get arrays
+//GetPrices godoc
+// @Summary      Show all prices
+// @Description  Route to show all prices
+// @Tags         prices
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  []models.Price
+// @Failure      400  {object}  httputil.HTTPError
+// @Router       /prices [get]
 func GetPrices(c *gin.Context) {
-	var prices []models.GamePrice
+	var prices []models.Price
 	database.DB.Table("GAME_PRICES").Find(&prices)
 	c.JSON(http.StatusOK, &prices)
 }
 
-func GetPriceAlerts(c *gin.Context) {
-	var alerts []models.PriceAlert
+//GetAlerts godoc
+// @Summary      Show all alerts
+// @Description  Route to show all alerts
+// @Tags         alerts
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  []models.Alert
+// @Failure      400  {object}  httputil.HTTPError
+// @Router       /alerts [get]
+func GetAlerts(c *gin.Context) {
+	var alerts []models.Alert
 	database.DB.Table("PRICE_ALERT").Find(&alerts)
 	c.JSON(http.StatusOK, &alerts)
 }
 
 //Get by id
 func GetPricesByGameId(c *gin.Context) {
-	var prices []models.GamePrice
+	var prices []models.Price
 	id := c.Params.ByName("game_id")
 
 	database.DB.Table("GAME_PRICES").Find(&prices).Where("game_id = ?", id)
@@ -66,7 +83,7 @@ func GetPricesByGameId(c *gin.Context) {
 }
 
 func GetAlertsByIds(c *gin.Context) {
-	var alerts []models.PriceAlert
+	var alerts []models.Alert
 	user_id := c.Params.ByName("user_id")
 	game_id := c.Params.ByName("game_id")
 

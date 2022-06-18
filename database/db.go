@@ -47,7 +47,7 @@ func UserOps(user *models.User, operation string) *models.User {
 	return user
 }
 
-func AlertOps(alert models.PriceAlert, operation string) models.PriceAlert {
+func AlertOps(alert models.Alert, operation string) models.Alert {
 	if operation == "create" {
 		DB.Table("USER").Create(&alert)
 	}
