@@ -12,15 +12,14 @@
 * [Project Status](#project-status)
 * [Tecnologies](#tecnologies)
 * [Running](#running)
-* [Developers](#developers)
 
 ## Project Description
 
-<p align="center">A website backend structure made with golang-gin</p>
+<p align="center">Backend operator for Busca Jogos +</p>
 
 ## Project Status
 
-:construction: Initial Stages :construction:
+:construction: Under building :construction:
 
 ## Tecnologies
 
@@ -29,6 +28,7 @@
 - ``Docker``
 - ``MySQL``
 - ``Swagger``
+- ``Thunder-Client``
 
 ## Running
 

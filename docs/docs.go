@@ -16,6 +16,38 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/alerts": {
+            "get": {
+                "description": "Route to show all alerts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "alerts"
+                ],
+                "summary": "Show all alerts",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Alert"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
         "/favorites": {
             "get": {
                 "description": "Route to show all favorites",
@@ -68,6 +100,166 @@ const docTemplate = `{
                             "$ref": "#/definitions/models.Favorite"
                         }
                     },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/games": {
+            "get": {
+                "description": "Route to show all games",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "games"
+                ],
+                "summary": "Show all games",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Game"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/genres": {
+            "get": {
+                "description": "Route to show all genres",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "genres"
+                ],
+                "summary": "Show all genres",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Genre"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/history": {
+            "get": {
+                "description": "Route to show all history",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "history"
+                ],
+                "summary": "Show all history",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.History"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/prices": {
+            "get": {
+                "description": "Route to show all prices",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "prices"
+                ],
+                "summary": "Show all prices",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Price"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/stores": {
+            "get": {
+                "description": "Route to show all stores",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stores"
+                ],
+                "summary": "Show all stores",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Store"
+                            }
+                        }
+                    },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
@@ -92,6 +284,20 @@ const docTemplate = `{
                 }
             }
         },
+        "models.Alert": {
+            "type": "object",
+            "properties": {
+                "game_id": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "models.Favorite": {
             "type": "object",
             "properties": {
@@ -100,6 +306,85 @@ const docTemplate = `{
                     "maximum": 60
                 },
                 "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.Game": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "game_id": {
+                    "type": "integer"
+                },
+                "genre_id": {
+                    "type": "integer"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "publisher": {
+                    "type": "string"
+                },
+                "video": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Genre": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "genre_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.History": {
+            "type": "object",
+            "properties": {
+                "change_date": {
+                    "type": "string"
+                },
+                "game_id": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "store_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Price": {
+            "type": "object",
+            "properties": {
+                "current_price": {
+                    "type": "number"
+                },
+                "game_id": {
+                    "type": "integer"
+                },
+                "store_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Store": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "store_id": {
                     "type": "integer"
                 }
             }

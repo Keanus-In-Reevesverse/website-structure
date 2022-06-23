@@ -8,25 +8,60 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//Get arrays
+//GetGames godoc
+// @Summary      Show all games
+// @Description  Route to show all games
+// @Tags         games
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  []models.Game
+// @Failure      400  {object}  httputil.HTTPError
+// @Router       /games [get]
 func GetGames(c *gin.Context) {
 	var games []models.Game
 	database.DB.Table("GAME").Find(&games)
 	c.JSON(http.StatusOK, &games)
 }
 
+//GetGenres godoc
+// @Summary      Show all genres
+// @Description  Route to show all genres
+// @Tags         genres
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  []models.Genre
+// @Failure      400  {object}  httputil.HTTPError
+// @Router       /genres [get]
 func GetGenres(c *gin.Context) {
 	var genres []models.Genre
 	database.DB.Table("GENRE").Find(&genres)
 	c.JSON(http.StatusOK, &genres)
 }
 
+//GetStores godoc
+// @Summary      Show all stores
+// @Description  Route to show all stores
+// @Tags         stores
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  []models.Store
+// @Failure      400  {object}  httputil.HTTPError
+// @Router       /stores [get]
 func GetStores(c *gin.Context) {
 	var stores []models.Store
 	database.DB.Table("STORE").Find(&stores)
 	c.JSON(http.StatusOK, &stores)
 }
 
+//GetHistory godoc
+// @Summary      Show all history
+// @Description  Route to show all history
+// @Tags         history
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  []models.History
+// @Failure      400  {object}  httputil.HTTPError
+// @Router       /history [get]
 func GetHistory(c *gin.Context) {
 	var history []models.History
 	database.DB.Table("HISTORY").Find(&history)

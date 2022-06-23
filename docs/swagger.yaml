@@ -8,6 +8,15 @@ definitions:
         example: status bad request
         type: string
     type: object
+  models.Alert:
+    properties:
+      game_id:
+        type: integer
+      price:
+        type: number
+      user_id:
+        type: integer
+    type: object
   models.Favorite:
     properties:
       game_id:
@@ -16,9 +25,81 @@ definitions:
       user_id:
         type: integer
     type: object
+  models.Game:
+    properties:
+      description:
+        type: string
+      game_id:
+        type: integer
+      genre_id:
+        type: integer
+      image:
+        type: string
+      name:
+        type: string
+      publisher:
+        type: string
+      video:
+        type: string
+    type: object
+  models.Genre:
+    properties:
+      description:
+        type: string
+      genre_id:
+        type: integer
+    type: object
+  models.History:
+    properties:
+      change_date:
+        type: string
+      game_id:
+        type: integer
+      price:
+        type: number
+      store_name:
+        type: string
+    type: object
+  models.Price:
+    properties:
+      current_price:
+        type: number
+      game_id:
+        type: integer
+      store_name:
+        type: string
+    type: object
+  models.Store:
+    properties:
+      name:
+        type: string
+      store_id:
+        type: integer
+    type: object
 info:
   contact: {}
 paths:
+  /alerts:
+    get:
+      consumes:
+      - application/json
+      description: Route to show all alerts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Alert'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Show all alerts
+      tags:
+      - alerts
   /favorites:
     get:
       consumes:
@@ -52,11 +133,116 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Favorite'
-        "400":
-          description: Bad Request
+        "404":
+          description: Not Found
           schema:
             $ref: '#/definitions/httputil.HTTPError'
       summary: Show favorite by user_id
       tags:
       - favorites
+  /games:
+    get:
+      consumes:
+      - application/json
+      description: Route to show all games
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Game'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Show all games
+      tags:
+      - games
+  /genres:
+    get:
+      consumes:
+      - application/json
+      description: Route to show all genres
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Genre'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Show all genres
+      tags:
+      - genres
+  /history:
+    get:
+      consumes:
+      - application/json
+      description: Route to show all history
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.History'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Show all history
+      tags:
+      - history
+  /prices:
+    get:
+      consumes:
+      - application/json
+      description: Route to show all prices
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Price'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Show all prices
+      tags:
+      - prices
+  /stores:
+    get:
+      consumes:
+      - application/json
+      description: Route to show all stores
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Store'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Show all stores
+      tags:
+      - stores
 swagger: "2.0"

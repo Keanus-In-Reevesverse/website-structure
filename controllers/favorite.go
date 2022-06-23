@@ -31,10 +31,10 @@ func GetFavorites(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Success      200  {object}  models.Favorite
-// @Failure      400  {object}  httputil.HTTPError
+// @Failure      404  {object}  httputil.HTTPError
 // @Router       /favorites/id [get]
 func GetFavoritesByUserId(c *gin.Context) {
-	var favorites []models.GamePrice
+	var favorites []models.Favorite
 	id := c.Params.ByName("user_id")
 
 	database.DB.Table("FAVORITES").Find(&favorites).Where("user_id = ?", id)
@@ -43,11 +43,6 @@ func GetFavoritesByUserId(c *gin.Context) {
 		if favorite.GameId == 0 {
 			c.JSON(http.StatusNotFound, gin.H{
 				"Not Found": "Game not found"})
-			return
-		}
-		if favorite.StoreName == "" {
-			c.JSON(http.StatusNotFound, gin.H{
-				"Not Found": "Store not found"})
 			return
 		}
 	}
