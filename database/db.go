@@ -62,3 +62,19 @@ func AlertOps(alert models.Alert, operation string) models.Alert {
 
 	return alert
 }
+
+func FavoriteOps(favorite models.Favorite, operation string) models.Favorite {
+	if operation == "create" {
+		DB.Table("USER").Create(&favorite)
+	}
+
+	if operation == "edit" {
+		DB.Table("USER").Where("game_id = ?", &favorite.UserId).Updates(&favorite)
+	}
+
+	if operation == "delete" {
+		DB.Table("USER").Where("user_id = ?", &favorite.UserId).Unscoped().Delete(&favorite)
+	}
+
+	return favorite
+}
