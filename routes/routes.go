@@ -16,6 +16,9 @@ func HandleRequests() {
 	docs.SwaggerInfo.BasePath = "/"
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
+	//Home Access
+	r.GET("/home", controllers.Home)
+
 	//Register
 	r.POST("/users", controllers.NewUser)
 	r.PATCH("/users", controllers.EditUser)
